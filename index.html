@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#f4f3ef">
+
+    <meta name="description" content="Рывок — простой таймер для концентрации. Сделай один. Потом решишь.">
+
+    <title>РЫВОК — Сделай один. Потом решишь.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- HEADER -->
+        <header class="header">
+            <button class="brand" id="brandButton" aria-label="На главный экран">
+                РЫВОК
+            </button>
+
+            <button class="settings-button" id="settingsButton" aria-label="Открыть настройки">
+                <span></span>
+                <span></span>
+            </button>
+        </header>
+
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <!-- SETUP -->
+            <section class="screen screen-setup active" id="setupScreen">
+
+                <div class="setup-content">
+
+                    <div class="eyebrow">
+                        КОНЦЕНТРАЦИЯ
+                    </div>
+
+                    <h1>
+                        Сделай один.<br>
+                        Потом решишь.
+                    </h1>
+
+                    <div class="duration-block">
+
+                        <div class="duration-label">
+                            ВРЕМЯ РЫВКА
+                        </div>
+
+                        <div class="duration-options" id="durationOptions">
+
+                            <button class="duration-option" data-minutes="5">
+                                <span>05</span>
+                                <small>МИН</small>
+                            </button>
+
+                            <button class="duration-option" data-minutes="15">
+                                <span>15</span>
+                                <small>МИН</small>
+                            </button>
+
+                            <button class="duration-option selected" data-minutes="25">
+                                <span>25</span>
+                                <small>МИН</small>
+                            </button>
+
+                            <button class="duration-option" data-minutes="60">
+                                <span>60</span>
+                                <small>МИН</small>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <button class="start-button" id="startButton">
+                        <span>НАЧАТЬ РЫВОК</span>
+                        <span class="arrow">↗</span>
+                    </button>
+
+                </div>
+
+                <div class="setup-footer">
+                    <span>ПЕРЕРЫВ</span>
+                    <span id="breakDurationLabel">05:00</span>
+                </div>
+
+            </section>
+
+
+            <!-- WORK -->
+            <section class="screen screen-timer" id="workScreen">
+
+                <div class="timer-screen-content">
+
+                    <div class="timer-status">
+                        РЫВОК
+                    </div>
+
+                    <div class="timer" id="workTimer">
+                        25:00
+                    </div>
+
+                    <div class="timer-progress">
+                        <div class="timer-progress-fill" id="workProgress"></div>
+                    </div>
+
+                    <div class="timer-actions">
+
+                        <button class="secondary-action" id="pauseButton">
+                            ПАУЗА
+                        </button>
+
+                        <button class="text-action" id="finishButton">
+                            ЗАВЕРШИТЬ
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- COMPLETE -->
+            <section class="screen screen-complete" id="completeScreen">
+
+                <div class="complete-content">
+
+                    <div class="complete-mark">
+                        ✓
+                    </div>
+
+                    <div class="eyebrow">
+                        РЫВОК ЗАВЕРШЁН
+                    </div>
+
+                    <div class="complete-time" id="completedTime">
+                        25:00
+                    </div>
+
+                    <h2>
+                        Ещё один?
+                    </h2>
+
+                    <div class="next-options">
+
+                        <button data-next-minutes="5">05</button>
+                        <button data-next-minutes="15">15</button>
+                        <button data-next-minutes="25">25</button>
+                        <button data-next-minutes="60">60</button>
+
+                    </div>
+
+                    <button class="break-button" id="startBreakButton">
+                        ПЕРЕРЫВ
+                        <span id="completeBreakDuration">05:00</span>
+                    </button>
+
+                    <button class="back-action" id="backFromComplete">
+                        ВЕРНУТЬСЯ
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- BREAK -->
+            <section class="screen screen-break" id="breakScreen">
+
+                <div class="timer-screen-content">
+
+                    <div class="timer-status">
+                        ПЕРЕРЫВ
+                    </div>
+
+                    <div class="timer" id="breakTimer">
+                        05:00
+                    </div>
+
+                    <div class="timer-progress">
+                        <div class="timer-progress-fill" id="breakProgress"></div>
+                    </div>
+
+                    <button class="secondary-action" id="skipBreakButton">
+                        ЗАКОНЧИТЬ ПЕРЕРЫВ
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- BREAK COMPLETE -->
+            <section class="screen screen-break-complete" id="breakCompleteScreen">
+
+                <div class="complete-content">
+
+                    <div class="complete-mark">
+                        ✓
+                    </div>
+
+                    <div class="eyebrow">
+                        ПЕРЕРЫВ ЗАВЕРШЁН
+                    </div>
+
+                    <h2>
+                        Готов к новому<br>
+                        рывку?
+                    </h2>
+
+                    <div class="next-options">
+
+                        <button data-break-next="5">05</button>
+                        <button data-break-next="15">15</button>
+                        <button data-break-next="25">25</button>
+                        <button data-break-next="60">60</button>
+
+                    </div>
+
+                    <button class="back-action" id="backFromBreak">
+                        НЕТ, ПОЗЖЕ
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- SETTINGS -->
+        <div class="settings-overlay" id="settingsOverlay">
+
+            <aside class="settings-panel">
+
+                <div class="settings-header">
+                    <div>
+                        <div class="settings-eyebrow">
+                            НАСТРОЙКИ
+                        </div>
+
+                        <h3>Рывок</h3>
+                    </div>
+
+                    <button class="close-settings" id="closeSettings" aria-label="Закрыть настройки">
+                        ×
+                    </button>
+                </div>
+
+
+                <div class="settings-section">
+
+                    <div class="settings-label">
+                        ПЕРЕРЫВ
+                    </div>
+
+                    <div class="settings-choice-row">
+
+                        <button class="break-option" data-break="5">
+                            05
+                        </button>
+
+                        <button class="break-option" data-break="10">
+                            10
+                        </button>
+
+                        <button class="break-option" data-break="15">
+                            15
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-section">
+
+                    <div class="settings-label">
+                        ЗВУК
+                    </div>
+
+                    <button class="toggle-row" id="soundToggle">
+
+                        <span>
+                            Звук завершения
+                        </span>
+
+                        <span class="toggle">
+                            <span class="toggle-dot"></span>
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <div class="settings-section">
+
+                    <div class="settings-label">
+                        ТЕМА
+                    </div>
+
+                    <div class="theme-grid">
+
+                        <button class="theme-option" data-theme="paper">
+                            <span class="theme-preview paper-preview"></span>
+                            Бумага
+                        </button>
+
+                        <button class="theme-option" data-theme="warm">
+                            <span class="theme-preview warm-preview"></span>
+                            Тёплая
+                        </button>
+
+                        <button class="theme-option" data-theme="mist">
+                            <span class="theme-preview mist-preview"></span>
+                            Туман
+                        </button>
+
+                        <button class="theme-option" data-theme="midnight">
+                            <span class="theme-preview midnight-preview"></span>
+                            Полночь
+                        </button>
+
+                        <button class="theme-option" data-theme="graphite">
+                            <span class="theme-preview graphite-preview"></span>
+                            Графит
+                        </button>
+
+                        <button class="theme-option" data-theme="forest">
+                            <span class="theme-preview forest-preview"></span>
+                            Лес
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-bottom">
+                    Сделай один. Потом решишь.
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
